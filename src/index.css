@@ -71,14 +71,15 @@ input {
 #recommended button {
    background-color: #0472ff;
    border-radius: 50%;
-   height: 10px;
-   width: 10px;
+   height: 7px;
+   width: 7px;
    cursor: pointer;
    border: none;
    vertical-align: middle;   
    color: white;
    font-size: smaller;
    line-height: 2px;
+   padding-left: 7px;
 }
 
 

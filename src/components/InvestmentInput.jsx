@@ -1,14 +1,30 @@
 import { useState } from "react"
-import ReactDOM from 'react-dom/client'
-
+import Loader from "./Loader";
 
 function InvestmentInput() {
 const [valueInitial, setValueInitial] = useState("");
 const [valueMonthly, setValueMonthly] = useState("");
+const [isLoading, setIsLoading] = useState(false);
 const recommended = 1000 + Math.floor(Math.random() * (1000 - 1 + 1) + 1);
 
+const onChange = (e) => {
+   e.preventDefault();
+   const investment = { valueInitial, valueMonthly };
+
+   setIsLoading(true);
+
+   fetch('http://www.mocky.io/v2/5e69de892d00007a005f9e29?mocky-delay=2000ms', {
+      method: 'POST',
+      headers: { "Content-Type" : "application/json"},
+      body: JSON.stringify(investment)
+   }).then(() => {
+      console.log("new data added")
+      setIsLoading(false);
+   })
+}
+
    return (
-      <form>
+      <form onChange={onChange}>
          <div class="formContainer">
             <div id="container1">
                <label id="label1">Initial investment</label>
@@ -35,6 +51,7 @@ const recommended = 1000 + Math.floor(Math.random() * (1000 - 1 + 1) + 1);
                   </div>
             </div>
          </div>
+         {isLoading ? <Loader /> : "Fetch Data"}
       </form>
    )
 }
