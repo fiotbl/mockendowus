@@ -47,41 +47,49 @@ const LineChart = () => {
             {  
                label: "Top 25%",
                data: chart?.map(x => x.expectedAmounts['75']),
-               borderColor: '#243119',
                tension: 0.1,
                borderDash: [3],
                pointRadius: 0,
+               backgroundColor: '#8F7E4F',
+               borderColor: '#8F7E4F',
+               fill: 'origin',
             },
             {
                label: "Median",
                data: chart?.map(x => x.expectedAmounts['50']),
-               borderColor: '#466365',
                tension: 0.1,
                pointRadius: 0,
+               backgroundColor: '#226F54',
+               borderColor: '#226F54',
+               fill: '+2',
             },
             {
                label: "Bottom 10%",
                data: chart?.map(x => x.expectedAmounts['10']),
-               borderColor: '#96BE8C',
                tension: 0.1,
                borderDash: [3],
                pointRadius: 0,
-               fill: true,
-               backgroundColor: '#ddddff'
+               backgroundColor: '#DEDBD8',
+               borderColor: '#DEDBD8',
+               fill: 1,
             },
             {
                label: "Benchmark",
                data: chart?.map(x => x.expectedAmounts['benchmark']),
-               borderColor: '#B49A67',
                tension: 0.1,
                pointRadius: 0,
+               backgroundColor: '#3A435E',
+               borderColor: '#3A435E',
+               fill: false,
             },
             {
                label: "Total deposit",
                data: chart?.map(x => x.totalDeposit),
-               borderColor: '#CEB3AB',
                tension: 0.1,
                pointRadius: 0,
+               backgroundColor: '#E75A7C',
+               borderColor: '#E75A7C',
+               fill: '-2',
             },
       ]
       }
@@ -89,17 +97,22 @@ const LineChart = () => {
       var options = {
 
          maintainAspectRatio: false,
-         tooltips: {
-            showToolTips: true,
-            tooltipEvents: ["mousemove", "touchstart", "touchmove"],
-            mode: 'index',
-            intersect: false,
-            tooltipFillColor: "rgba(100,100,100,1)",
-            tooltipFontSize: 30,
-            titleColor: "#B49A67",
-            backgroundColor: 'rgba(0, 0, 255, 1)',
+         //tooltip configurations
+         plugins: {
+            filler: {
+               propogate: true,
+            },
+            tooltip: {
+               tooltipFillColor: "rgba(100,100,100,1)",
+               titleColor: "#B49A67",
+               backgroundColor: '#FFFFFF',
+               borderColor: '#808080',
+               borderWidth: 0.5,
+               cornerRadius: 0,
+               bodyColor: '#000000',
+               displayColors: true,
+            },
          },
-
          //Makes tooltip show all values
          interaction: {
             intersect: false,

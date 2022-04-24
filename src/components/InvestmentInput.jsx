@@ -21,7 +21,6 @@ const onChange = (e) => {
    }).then(() => {
       console.log("new data added")
       setIsLoading(false);
-      console.log(investment)
    })
 }
 
