@@ -2,7 +2,6 @@ import {useState, useEffect} from 'react'
 import {Chart as ChartJS, LineElement, PointElement, CategoryScale, LinearScale, Tooltip} from 'chart.js'
 import { Line } from 'react-chartjs-2'
 
-
 ChartJS.register(
    LinearScale,
    CategoryScale,
@@ -37,8 +36,6 @@ const LineChart = () => {
       }
       fetchData()
    }, [])
-
-
 
    var data = {
          type: 'line',

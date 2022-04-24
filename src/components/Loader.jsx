@@ -1,8 +1,8 @@
-import loadingRing from '../Misc/Loading-Ring.gif'
+import blueSpinner from '../Misc/blueSpinner.gif'
 
 function Loader() {
    
-   return <img src={loadingRing} alt="Loading..." style={{width: '200px', margin: 'auto', display: 'block'}} />
+   return <img src={blueSpinner} alt="Loading..." style={{width: '200px', margin: 'auto', display: 'block'}} />
 
 }
 
