@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Loader from "./Loader";
+import LineChart from "./LineChart";
 
 function InvestmentInput() {
 const [valueInitial, setValueInitial] = useState("");
@@ -20,6 +21,7 @@ const onChange = (e) => {
    }).then(() => {
       console.log("new data added")
       setIsLoading(false);
+      console.log(investment)
    })
 }
 
@@ -51,7 +53,7 @@ const onChange = (e) => {
                   </div>
             </div>
          </div>
-         {isLoading ? <Loader /> : "Fetch Data"}
+         {isLoading ? <Loader /> : <LineChart />}
       </form>
    )
 }
