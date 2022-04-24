@@ -1,12 +1,14 @@
 import {useState, useEffect} from 'react'
-import {Chart as ChartJS, LineElement, PointElement, CategoryScale, LinearScale} from 'chart.js'
+import {Chart as ChartJS, LineElement, PointElement, CategoryScale, LinearScale, Tooltip} from 'chart.js'
 import { Line } from 'react-chartjs-2'
+
 
 ChartJS.register(
    LinearScale,
    CategoryScale,
    LineElement,
-   PointElement
+   PointElement,
+   Tooltip,
 )
 
 const LineChart = () => {
@@ -39,8 +41,8 @@ const LineChart = () => {
 
 
    var data = {
+         type: 'line',
          labels: chart?.map(x => x.yearMonth.split("-")[0]),
-         
          datasets: [
             {  
                label: "Top 25%",
@@ -85,10 +87,23 @@ const LineChart = () => {
       }
 
       var options = {
+
          maintainAspectRatio: false,
          tooltips: {
+            showToolTips: true,
+            tooltipEvents: ["mousemove", "touchstart", "touchmove"],
             mode: 'index',
-            interesect: false,
+            intersect: false,
+            tooltipFillColor: "rgba(100,100,100,1)",
+            tooltipFontSize: 30,
+            titleColor: "#B49A67",
+            backgroundColor: 'rgba(0, 0, 255, 1)',
+         },
+
+         //Makes tooltip show all values
+         interaction: {
+            intersect: false,
+            mode: 'index',
          },
          hover: {
             mode: 'index',
@@ -111,21 +126,22 @@ const LineChart = () => {
                title:{
                   display: true,
                   text: 'Year'
-               }
-            }
+               },
+            },
          },
+
          legend: {
             labels: {
                fontSize: 26
             }
-         }
+         },
       }
 
    return (
       <div>
          <Line 
             data={data}
-            height={400}
+            height={600}
             options={options}
          />
       </div>
