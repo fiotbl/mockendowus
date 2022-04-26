@@ -1,5 +1,5 @@
 import { useState } from "react"
-import Loader from "./Loader";
+import Loader from "../sharedAssets/Loader";
 import LineChart from "./LineChart";
 
 function InvestmentInput() {
@@ -16,17 +16,19 @@ const onChange = (e) => {
 
    fetch('http://www.mocky.io/v2/5e69de892d00007a005f9e29?mocky-delay=2000ms', {
       method: 'POST',
-      headers: { "Content-Type" : "application/json"},
+      headers: { 'Content-Type' : 'application/json'},
       body: JSON.stringify(investment)
    }).then(() => {
       console.log("new data added")
       setIsLoading(false);
-   })
+   }).catch(error => {
+         console.log(error);
+      })
 }
 
    return (
       <form onChange={onChange}>
-         <div class="formContainer">
+         <div className="formContainer">
             <div id="container1">
                <label id="label1">Initial investment</label>
                   <input id="input1"

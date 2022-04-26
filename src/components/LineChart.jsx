@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import {Chart as ChartJS, LineElement, PointElement, CategoryScale, LinearScale, Tooltip} from 'chart.js'
 import { Line } from 'react-chartjs-2'
 
+//Register components from chartjs library to enable usage
 ChartJS.register(
    LinearScale,
    CategoryScale,
@@ -19,16 +20,13 @@ const LineChart = () => {
    useEffect(() => {
       const fetchData = async() => {
          await fetch(`${baseUrl}`, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                'Content-Type' : 'application/json',
             }
          }).then((response) => {
          response.json().then((json) => {
-   
             setChart(json)
-            console.log(json)
-            console.log("chart", chart)
          })
       }).catch(error => {
          console.log(error);
@@ -37,7 +35,10 @@ const LineChart = () => {
       fetchData()
    }, [])
 
+   //Configs for the line chart
    var data = {
+
+         //Configs for top 25% | Response field -> expectedAmounts['75']
          type: 'line',
          labels: chart?.map(x => x.yearMonth.split("-")[0]),
          datasets: [
@@ -52,6 +53,7 @@ const LineChart = () => {
                fill: 'origin',
             },
             {
+               //Configs for median | Response field -> expectedAmounts['50']
                label: "Median",
                data: chart?.map(x => x.expectedAmounts['50']),
                tension: 0.1,
@@ -61,6 +63,7 @@ const LineChart = () => {
                fill: '+2',
             },
             {
+               //Configs for bottom 10% | Response field -> expectedAmounts['10']
                label: "Bottom 10%",
                data: chart?.map(x => x.expectedAmounts['10']),
                tension: 0.1,
@@ -71,6 +74,7 @@ const LineChart = () => {
                fill: 1,
             },
             {
+               //Configs for benchmark | Response field -> expectedAmounts['benchmark']
                label: "Benchmark",
                data: chart?.map(x => x.expectedAmounts['benchmark']),
                tension: 0.1,
@@ -80,6 +84,7 @@ const LineChart = () => {
                fill: false,
             },
             {
+               //Configs for total deposit | Response field -> totalDeposit
                label: "Total deposit",
                data: chart?.map(x => x.totalDeposit),
                tension: 0.1,
@@ -91,6 +96,7 @@ const LineChart = () => {
       ]
       }
 
+      //ChartJS x,y scales and tooltips config
       var options = {
 
          maintainAspectRatio: false,
@@ -110,7 +116,7 @@ const LineChart = () => {
                displayColors: true,
             },
          },
-         //Makes tooltip show all values
+         //Enables tooltip to show all values
          interaction: {
             intersect: false,
             mode: 'index',
