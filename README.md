@@ -1,7 +1,71 @@
-# Getting Started with Create React App
+# `Endowus Mission 1`
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Used [Create React App](https://github.com/facebook/create-react-app) as the boilerplate. </br>
+</br>
+run tool: </br>
+`npm start` </br>
 
+to open a preview of this README.md file: </br>
+`Ctrl+Shift+V`
+
+## Components
+- [Header](/src/components/Header.jsx)
+- [InvestmentInput](/src/components/.jsx)
+- [LineChart](/src/components/LineChart.jsx)
+
+## Shared Assets
+- [Loading-Spinner](/src/sharedAssets/Loader.jsx)
+
+## Logic
+- [Header](/src/components/Header.jsx) </br>
+A pure html component that contains the description of the projection/investment plan. 
+   </br></br>
+- [InvestmentInput](/src/components/.jsx) </br>
+Users will key into two input fields in order to return chart projection
+   1. ***valueInitial*** (Their intended initial investment amount)
+   2. ***valueMonthly*** (Their intended monthly investment amount)
+   
+   
+   HTTP ***POST*** method is invoked whenever the user changes their ***valueInitial*** or ***valueMonthly*** field. </br>
+   ```
+   fetch('http://www.mocky.io/v2/5e69de892d00007a005f9e29?mocky-delay=2000ms', {
+         method: 'POST',
+         headers: { 'Content-Type' : 'application/json'},
+         body: JSON.stringify(investment)
+      }
+   ``` 
+   For simulation purposes, I created a variable to display an arbitrary value for the ***recommended*** field whenever the user generates a new scenario. </br>
+
+   The [Loading-Spinner-gif](/src/Misc/blueSpinner.gif) will appear as a buffer whenever the user changes their input values. [LineChart](/src/components/LineChart.jsx) will appear after data has been successfully sent into the server.
+   </br></br>
+- [LineChart](/src/components/LineChart.jsx) </br>
+   Utilised [ChartJS](https://www.chartjs.org/) library to include an animated line graph to display the user's plan projection.</br></br>
+   Ideally, props(***valueInitial*** and ***valueMonthly***) should be passed down from InvestmentInput into LineChart component so as to fetch the required data when  HTTP ***GET*** method is invoked here. </br></br>
+   Plenty of time was spent trying to navigate and understand the documentation for ***ChartJS***. :face_with_thermometer: 
+
+   ```
+   var data
+   ```
+   contains the key configuration of the graph; displays the graph accordingly to the datasets invoked. </br>
+   Five key datasets</br>
+      1. expectedAmounts[‘75’] (top 25% outcome of the investment projection)
+      2. expectedAmounts[‘50’] (median outcome of the investment projection)
+      3. expectedAmounts[‘10’] (bottom 10% of the invesment projection)
+      4. expectedAmounts['benchmark'] (benchmark)
+      5. totalDeposit (Total deposit)
+   </br>
+   </br>
+   ```
+   var options
+   ```
+   contains the configuration for scale styles and tooltips settings. 
+
+   # End of my README.md
+   </br></br>
+
+
+
+# Miscellaneous 
 ## Available Scripts
 
 In the project directory, you can run:
