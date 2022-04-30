@@ -18,7 +18,10 @@ const LineChart = () => {
    var baseUrl = "http://www.mocky.io/v2/5e69de892d00007a005f9e29?mocky-delay=2000ms"
 
    useEffect(() => {
-      const fetchData = async() => {
+      fetchData()
+   }, [])
+
+   const fetchData = async() => {
          await fetch(`${baseUrl}`, {
             method: 'GET',
             headers: {
@@ -32,8 +35,7 @@ const LineChart = () => {
          console.log(error);
       })
       }
-      fetchData()
-   }, [])
+
 
    //Configs for the line chart
    var data = {
