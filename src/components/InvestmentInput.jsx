@@ -21,7 +21,7 @@ const onChange = (e) => {
    }).then(() => {
       console.log("new data added")
       setIsLoading(false);
-   }).catch(error => {
+   }).catch(error => { 
          console.log(error);
       })
 }
@@ -54,7 +54,7 @@ const onChange = (e) => {
                   </div>
             </div>
          </div>
-         {isLoading ? <Loader /> : <LineChart />}
+         {isLoading ? <Loader /> : <LineChart valueInitial={valueInitial} valueMonthly={valueMonthly} />}
       </form>
    )
 }

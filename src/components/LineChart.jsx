@@ -11,15 +11,13 @@ ChartJS.register(
    Tooltip,
 )
 
-const LineChart = () => {
+const LineChart = (props) => {
 
    const [chart, setChart] = useState([])
+   const initial = props.valueInitial
+   const monthly = props.valueMonthly
 
-   var baseUrl = "http://www.mocky.io/v2/5e69de892d00007a005f9e29?mocky-delay=2000ms"
-
-   useEffect(() => {
-      fetchData()
-   }, [])
+   var baseUrl = `http://www.mocky.io/v2/5e69de892d00007a005f9e29?mocky-delay=2000ms`
 
    const fetchData = async() => {
          await fetch(`${baseUrl}`, {
@@ -34,17 +32,21 @@ const LineChart = () => {
       }).catch(error => {
          console.log(error);
       })
-      }
+   }
 
+      useEffect(() => {
+      fetchData()
+   }, [])
 
    //Configs for the line chart
    var data = {
 
-         //Configs for top 25% | Response field -> expectedAmounts['75']
          type: 'line',
+         //x-axis label
          labels: chart?.map(x => x.yearMonth.split("-")[0]),
          datasets: [
             {  
+               //Configs for top 25% | Response field -> expectedAmounts['75']
                label: "Top 25%",
                data: chart?.map(x => x.expectedAmounts['75']),
                tension: 0.1,
@@ -120,8 +122,8 @@ const LineChart = () => {
          },
          //Enables tooltip to show all values
          interaction: {
-            intersect: false,
             mode: 'index',
+            intersect: false,
          },
          hover: {
             mode: 'index',
@@ -162,7 +164,7 @@ const LineChart = () => {
             height={600}
             options={options}
          />
-      </div>
+      </div>      
    )
 }
 
