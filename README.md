@@ -1,4 +1,4 @@
-# `Endowus Mission 1 - Fiora Tan Bei Lun Hello` 
+# `Endowus Mission 1 - Fiora Tan Bei Lun Hello There` 
 
 Used [Create React App](https://github.com/facebook/create-react-app) as the boilerplate. </br>
 </br>
